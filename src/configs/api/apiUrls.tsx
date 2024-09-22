@@ -18,4 +18,5 @@ export const ApiUrl = {
   ADD_ROLE_URL: "role/add",
   EDIT_ROLE_URL: "role/edit/",
   GET_ROLE_URL: "role/get",
+  GET_ALL_USER: "user/get-all",
 };

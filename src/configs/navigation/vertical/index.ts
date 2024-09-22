@@ -32,12 +32,12 @@ const navigation = (): VerticalNavItemsType => {
           subject: AbilityNames.ROLE_PAGE,
           title: "Role",
         },
-        {
-          path: "/tile-options",
-          action: "read",
-          subject: AbilityNames.ROLEOPTION_PAGE,
-          title: "Role Options",
-        },
+        // {
+        //   path: "/tile-options",
+        //   action: "read",
+        //   subject: AbilityNames.ROLEOPTION_PAGE,
+        //   title: "Role Options",
+        // },
       ],
     },
   ];

@@ -13,8 +13,17 @@ import AddIcon from "@mui/icons-material/Add";
 
 import GTable from "src/configs/g_components/g_table/Table/g_table";
 import UserRow from "src/configs/g_components/g_table/Rows/UserRow";
+import { useQuery } from "@tanstack/react-query";
+import UserController from "./controller";
 
 const User = () => {
+  const userController = new UserController();
+  const { data, isPending } = useQuery({
+    queryKey: ["all-user"],
+    queryFn: userController.getUsers,
+  });
+  console.log(data);
+
   const [filterData, setFilteredData] = useState<Array<any>>([]);
   const TABLE_HEAD = [
     { label: "Sr no.", align: "left" },
@@ -48,9 +57,9 @@ const User = () => {
         <Grid item xs={12} sx={{ my: 4 }}>
           <GTable
             headData={TABLE_HEAD}
-            data={[]}
+            data={data}
             row={UserRow}
-            isLoading={false}
+            isLoading={isPending}
           />
         </Grid>
       </Grid>

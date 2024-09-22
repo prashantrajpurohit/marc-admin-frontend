@@ -29,11 +29,7 @@ const UserRow: FC<rowType> = ({
     router.push("/user/addEdit");
     // dispatch(addeditdata(data));
   };
-  row = {
-    name: "perry",
-    is_active: false,
-    phone: "989899",
-  };
+
   return (
     <TableRow hover key={Math.random()}>
       {isLoading ? (

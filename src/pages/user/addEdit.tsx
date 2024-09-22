@@ -12,6 +12,8 @@ import {
 import { useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
 import UserController from "./controller";
+import { useRouter } from "next/router";
+import { LoadingButton } from "@mui/lab";
 
 export interface userPayload {
   name: string;
@@ -26,8 +28,14 @@ const defaultPayload: userPayload = {
   password: "",
 };
 const UserAddEdit = () => {
+  const { push } = useRouter();
   const userController = new UserController();
-  const { mutate } = useMutation({ mutationFn: userController.userAdd });
+  const { mutate, isPending } = useMutation({
+    mutationFn: userController.userAdd,
+    onSuccess() {
+      push("/user");
+    },
+  });
   const [userPayload, setUserPayload] = useState<userPayload>(defaultPayload);
   function handleSubmit() {
     mutate({ payload: userPayload });
@@ -105,13 +113,14 @@ const UserAddEdit = () => {
             />
           </Grid>
           <Grid item xs={6}>
-            <Button
+            <LoadingButton
+              loading={isPending}
               sx={{ float: "right" }}
               variant="contained"
               onClick={handleSubmit}
             >
               Submit
-            </Button>
+            </LoadingButton>
           </Grid>
         </Grid>
       </CardContent>

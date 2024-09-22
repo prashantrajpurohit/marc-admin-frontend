@@ -28,7 +28,7 @@ const AbilityProvider = (props: AclGuardProps) => {
 
   const defineRulesFor = (role: string, options: string[]) => {
     const { can, build } = new AbilityBuilder(createMongoAbility);
-    if (role === "super-admin" || "admin") {
+    if (role === "super-admin" || "admin" || "user") {
       can("manage", "all");
     } else {
       can("read", [...options]);
