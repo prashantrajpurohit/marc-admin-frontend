@@ -1,0 +1,42 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches:
+      - main  # Deploy on commits to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18  # Use your project's Node.js version
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build Project
+      run: npm run build
+
+    - name: Deploy via SSH
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+        host: ${{ secrets.HOSTINGER_HOST }} # Add this to your GitHub Secrets
+        key: ${{ secrets.SSH_KEY }}
+        port: 22
+        script: |
+          cd /var/www/komet_admin  # Update this to your server's project path
+          rm -rf *                  # Optional: Clear the directory
+          mkdir -p .next            # Ensure the .next folder exists
+          tar -xvf /tmp/project.tar.gz -C . # Extract files
+          npm install               # Install dependencies
+          pm2 restart all           # Restart the server (or use your server command)
+
+    - name: Archive Project
+      run: tar -czvf project.tar.gz ./

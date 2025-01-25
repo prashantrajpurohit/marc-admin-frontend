@@ -152,7 +152,7 @@ const LoginPage = () => {
                   lineHeight: 1.385,
                 }}
               >
-                Welcome to Marc Admin! 👋🏻
+                Welcome to Marc Adminsss! 👋🏻
               </Typography>
               <Typography sx={{ color: "text.secondary" }}>
                 Please sign-in to your account and start ..
