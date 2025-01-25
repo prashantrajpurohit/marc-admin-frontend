@@ -19,7 +19,7 @@ jobs:
         node-version: 18  # Use your project's Node.js version
 
     - name: Install Dependencies
-      run: npm install
+      run: npm install --legacy-peer-deps
 
     - name: Build Project
       run: npm run build
@@ -35,7 +35,7 @@ jobs:
           rm -rf *                  # Optional: Clear the directory
           mkdir -p .next            # Ensure the .next folder exists
           tar -xvf /tmp/project.tar.gz -C . # Extract files
-          npm install               # Install dependencies
+          npm install --legacy-peer-deps             # Install dependencies
           pm2 restart all           # Restart the server (or use your server command)
 
     - name: Archive Project
